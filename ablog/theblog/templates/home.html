@@ -2,31 +2,36 @@
 
 {% block content %}
 
+	{% if user.is_authenticated %}
+	<div class="alert alert-primary container shadow p-4 md-5 bg-body" role="alert">
+ 	 <strong>Congratualiations !</strong> You are successfully Login your account. <strong>Welcome - {{ user.username }}</strong>
+	</div><br>
+	{% endif %}
 
-<h1>Posts</h1>
-
-<ul>
-	{% for post in object_list %}
-	<li>
-		<a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
-		 - <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
-		 - {{ post.author.first_name }} 
-		{{ post.author.last_name }} - 
-		{{ post.post_date }}  
-		<small>
-			{% if user.is_authenticated %}
-				{% if user.id == post.author.id %}
-					- <a href="{% url 'update_post' post.pk %}">[Edit]</a>
-					<a href="{% url 'delete_post' post.pk %}">[Delete]</a>
+<h2>All Post</h2><hr>
+<div class="container shadow p-4 md-5 bg-body">
+	<ul>
+		{% for post in object_list %}
+		<li>
+			<a href="{% url 'article-detail' post.pk %}">{{ post.title }}</a>
+		 	- <a href="{% url 'category' post.category|slugify %}">{{ post.category }}</a>
+		 	- {{ post.author.first_name }} 
+			{{ post.author.last_name }} - 
+			{{ post.post_date }}  
+			<small>
+				{% if user.is_authenticated %}
+					{% if user.id == post.author.id %}
+						- <a href="{% url 'update_post' post.pk %}">[Edit]</a>
+						<a href="{% url 'delete_post' post.pk %}">[Delete]</a>
+					{% endif %}
 				{% endif %}
-			{% endif %}
-		</small>
-		<br/>
+			</small>
+			<br/>
 		{{ post.snippet }}	
 		
-	</li>
-	{% endfor %}
-</ul>
+		</li><br>
+		{% endfor %}
+	</ul>
 
-
+</div><br><br>
 {% endblock %}

@@ -9,6 +9,15 @@ from theblog.models import Profile
 
 # Create your views here.
 
+
+def LoginView(request):
+	success_url = reverse_lazy('home')
+	print("hello World")
+	print ('str', request.GET)
+	print("hello World")
+		
+	return render(request, 'registration/login.html')
+
 class UserRegisterView(generic.CreateView):
 	form_class = SignUpForm
 	template_name = 'registration/register.html'

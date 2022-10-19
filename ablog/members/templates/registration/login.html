@@ -7,19 +7,34 @@
 {% block content %}
 
 
-<h1>Login...</h1><br><br>
+<h3>Login...</h3><hr>
 
-<div class="form-group">
+<div class="form-group container shadow p-4 md-5 bg-body">
 	<form method="POST">
 		{% csrf_token %}
 		{{ form.as_p }}
 		<button class="btn btn-secondary">Login</button><br><br>
 
-		Not Registered? Sign Up <a href="{% url 'register' %}">Here...</a>
-		
-	</form>
-</div>
+		<hr>Not Registered? Sign Up <a href="{% url 'register' %}">Here...</a><hr>
+		<strong>OR...</strong><br>You Can Also Login Your Social Media Here<hr>
 
+		<button class= "btn btn-info mb-2">
+			<a href="{% url 'social:begin' 'google-oauth2' %}">Login with Google</a>
+		</button><br>
 
+		<button class= "btn btn-info mb-2">
+			<a href="{% url 'social:begin' 'github' %}">Login with Github</a>
+		</button><br>
+
+		<button class= "btn btn-info mb-2">
+			<a href="{% url 'social:begin' 'linkedin-oauth2' %}">Login with LinkedIn</a>
+		</button><br>
+
+		<button class= "btn btn-info mb-2">
+			<a href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+		</button><br>
+	
+	</form><hr>
+</div><br><br>
 
 {% endblock %}

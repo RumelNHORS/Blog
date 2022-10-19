@@ -4,9 +4,13 @@ from . models import post, Category, Comment
 from . forms import PostForm, EditForm, CommentForm
 from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
+#from django.contrib.auth.models.
+
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+#@login_required
 #def home(request):
 	#return render(request, 'home.html', {})
 
@@ -25,7 +29,7 @@ def LikeView(request, pk):
 	}
 	return render(request, 'article_details.html', context)
 
-
+#@login_required
 class HomeView(ListView):
 	model = post
 	template_name = 'home.html'
@@ -33,6 +37,10 @@ class HomeView(ListView):
 	#ordering = ['-id']
 
 	def get_context_data(self, *args, **kwargs):
+		#context = {}
+		#user = self.request.user
+		#if user.is_authenticated:
+
 		cat_menu = Category.objects.all()
 		context = super(HomeView, self).get_context_data(*args, **kwargs)
 		context["cat_menu"] = cat_menu
